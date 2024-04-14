@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+
+.firstDiv {
+	width: 1000px;
+	text-align: center;
+	margin:30px auto;
+}
+
+#divSerach {
+	width: 1000px;
+	text-align: right;
+}
+
+#divSerach #serachKey {
+	width: 150px;
+	height: 27px;
+	margin-bottom: 20px;
+}
+
+#divTable {
+	width: 1000px;
+}
+
+#divTable #tbHead {
+ background-color: #ccc;
+ height: 27px;
+}
+
+#divTable #tbHead tr td {
+	text-align: center;
+}
+
+#divTable #tbBody {
+ height: 27px;
+ width: 1000px;
+}
+
+.num {width:10%; cursor: pointer;}
+.subject {width:45%; cursor: pointer;}
+.name {width:15%; cursor: pointer;}
+.created {width:15%; cursor: pointer;}
+.hitCount {width:15%; cursor: pointer;}
+.noData {width: 100%; text-align: center; cursor: pointer;}
+
+#divBtn {
+	width: 1000px;
+	text-align: right;
+	margin-top: 20px;
+}
+
+#divBtn input {
+	font-size: large;
+	color: white;
+	font-weight: bold;
+	background: #0d82eb;
+	border: 0px;
+}
+
+table {
+	border-top : 1px solid black;
+    vertical-align: middle;
+    line-height: 1.4;
+    text-align: center;
+    font-weight: 700;
+}
+
+/***************************** paging *****************************/
+.divPaging {
+	margin-top:3px;
+	vertical-align:super;
+	text-align:center;
+}
+
+.divPaging a .divPaging strong {
+	display:inline-block;
+	padding:8px;
+	box-sizing:border-box;
+	margin:0px 2px;
+}
+
+.divPaging strong {
+	text-decoration:underline;
+	font-weight: 700;
+}
+.divPaging strong .divPaging-prev {
+	color:#333;
+}
+
+.sib-paging-prev {
+	margin-right:4px;
+	vertical-align:super;
+}
+
+.sib-paging-next {
+	margin-left:4px;
+	vertical-align:super;
+}
+
+.sib-paging-prev .sib-ico-set-paging-prev {
+	margin-right:6px;
+}
+
+.sib-paging-next .sib-ico-set-paging-next {
+	margin-left:6px;
+}
+
+.divPaging a.sib-paging-prev {position: relative;padding-left: 26px}
+.divPaging a.sib-paging-prev:before {content: '';position: absolute;top: 6px;left: 0;width: 22px;height: 22px;background: url(/board/img/ico-sprite-board.png) no-repeat -185px -115px;}
+.divPaging a.sib-paging-next {position: relative;padding-right: 26px;color: #333;}
+.divPaging a.sib-paging-next:after {content: '';position: absolute;top: 6px;right: 0;width: 22px;height: 22px;background: url(/board/img/ico-sprite-board.png) no-repeat -210px -115px;}
+
+.page {
+	margin: 5px;
+}
+/***************************** paging *****************************/
