@@ -12,7 +12,7 @@
 
 	window.onload = function() {
 		<!--sessionstorage 에 Lits 데이터 존재 여부 확인 후 기초 데이터 저장 -->
-		if(!this.isNaN(sessionStorage.getItem("list"))) {
+		if(sessionStorage.getItem("list") == null) {
 			
 			var list = [
 			{

@@ -22,7 +22,7 @@
 
 		var param = urlParams.get('num');
 
-		if(!this.isNaN(param)){
+		if(param != null){
 			var list = JSON.parse(sessionStorage.getItem("list"));
 			$('#subject').val(list[parseInt(param)-1].subject);
 			$('#name').val(list[parseInt(param)-1].name);
@@ -65,7 +65,7 @@
 		var urlParams = new URL(location.href).searchParams;
 		var param = urlParams.get('num');
 
-		if(!this.isNaN(param)){
+		if(param != null){
 			list[parseInt(param)-1].num = param;
 			list[parseInt(param)-1].subject = data.subject;
 			list[parseInt(param)-1].name = data.name;
