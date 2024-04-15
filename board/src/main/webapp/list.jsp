@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/board/css/list.css" />
 <script src="/board/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
-	var currentPage = 10;
+	var currentPage = 10; // pagging 기준 갯수
 
 	window.onload = function() {
 		<!--sessionstorage 에 Lits 데이터 존재 여부 확인 후 기초 데이터 저장 -->
@@ -296,7 +296,8 @@
 				created : "20240402",
 				hitCount : "0"
 			} ];
-	
+
+			<!-- sessionStorage list 데이터 set -->
 			sessionStorage.setItem("list", JSON.stringify(list));
 			
 			<!-- data mapping / page mapping -->
@@ -309,15 +310,16 @@
 		}
 	}
 
+	<!-- grid list data mapping -->
 	function listMapping(num) {
 		var list = JSON.parse(sessionStorage.getItem("list"));
 		var data = "";
-		var len = $('#serachKey').val();
+		var len = $('#serachKey').val(); //그리드 페이지덩 보여 줄 데이터 수 
 		
-		var endPage = parseInt(num) * parseInt(len);
-		var startPage = endPage - parseInt(len);
+		var endPage = parseInt(num) * parseInt(len); //현재 페이지 * 페이지당 데이터 수
+		var startPage = endPage - parseInt(len);  //마지막 데이터 순번 * 페이지당 데이터 수
 		
-		if(list.length < endPage) {
+		if(list.length < endPage) { //전체 데이터 수 보다 마지막 데이터 순번이 작은지 확인
 			endPage = list.length;
 		}
 		
@@ -333,7 +335,7 @@
 				data += "<td class='hitCount' onclick='fnReWrite("+ list[i].num +")'>" + list[i].hitCount
 						+ "</td></tr>";
 
-				if (len - 1 == i) {
+				if (len - 1 == i) { //페이지당 데이터 수 -1을 하는 이유는 list 데이터 시작 번호 0
 					break;
 				}
 			}
@@ -348,6 +350,7 @@
 
 	}
 	
+	<!-- 작성자 이름 마스킹 처리 처음과 마지막 글자만 빼고 중간 데이터 마스킹 처리 -->
 	function masking(name) {
 	  if (name.length > 2) {
 	    var originName = name.split('');
@@ -363,11 +366,13 @@
 	  }
 	}
 	
+	<!-- 페이지 당 데이터 수 변경 시 발생하는 이벤트 -->
 	function fnChange() {
 		listMapping(1);
 		pagingMapping(1)
 	}
 	
+	<!-- pagging mapping -->
 	function pagingMapping(num) {
 		var list = JSON.parse(sessionStorage.getItem("list"));
 		var total = list.length;
@@ -378,18 +383,18 @@
 		if(total < len){
 			pageData += "<strong>1</strong>";
 		}else {
-			page = Math.ceil(total / len);
+			page = Math.ceil(total / len); //페이지 수 계산시 소수점 올림처리를 위한 계산
 			
-			if(page > currentPage) {
+			if(page > currentPage) { //페이지 수가 기준 페이지 수 보다 작을 시 페이지 수 / 기준 페이지
 				page = page / currentPage;
 			}
 			
-			if(page < 1){
+			if(page < 1){ //전체 페이지 수가 1보다 작을 시 1 페이지 처리
 				page = 1;
 			}
 			var pageNum = 1;
 			
-			if(num <= page){
+			if(num <= page){ //현재 페이지가 pagging과 같거나 작을 경우와 아닌 경우를 나눔
 				for (var i = 0; i < page; i++) {
 					if(num == pageNum){
 						pageData += "<strong class='page'>"+ pageNum +"</strong>";
@@ -418,6 +423,7 @@
 		$("#pagingNumberSpan").html(pageData);
 	}
 	
+	<!-- 클릭한 페이지 데이터 로드 -->
 	function fnMovePage(text) {
 		console.log(text);
 		listMapping(text);
@@ -425,6 +431,7 @@
 		
 	}
 	
+	<!-- pagging 이전 페이지 -->
 	function fnPrePage() {
 		var pre = parseInt($('#pagingNumberSpan > strong').text());
 		if(pre => 1) {
@@ -437,6 +444,7 @@
 		}
 	}
 	
+	<!-- pagging 다음 페이지 -->
 	function fnNextPage() {
 		var next = parseInt($('#pagingNumberSpan > strong').text());
 		if(next => 1) {
@@ -452,10 +460,12 @@
 		}
 	}
 	
+	<!-- 글작성 페이지로 이동 -->
 	function fnWrite() {
 		location.href="write";
 	}
 	
+	<!-- 글수정 페이지로 이동 : 이동시 데이터 seq 번호 파라미터 전달 -->
 	function fnReWrite(num) {
 		location.href="write?num="+num;
 	}
