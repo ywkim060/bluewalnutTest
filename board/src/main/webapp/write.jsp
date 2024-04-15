@@ -33,7 +33,8 @@
 			//quill.insertText(selection.index, list[parseInt(param)-1].content);
 			
 			$('.ql-editor').empty();
-			$('.ql-editor').html(list[parseInt(param)-1].content)
+			$('.ql-editor').html(list[parseInt(param)-1].content);
+			quill.getSelection(true);
 			
 			//작성되어있는 데이터 byte 수 확인
 			$('#textByte').text(quill.getLength() + ' byte');
